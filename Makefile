@@ -2,7 +2,7 @@ CC      = gcc
 CFLAGS  = -g -I./include/
 LIBS    = -lncurses
 TARGET  = build/top
-SRCS    = src/main.c src/memory.c src/ui.c
+SRCS    = src/main.c src/memory.c src/ui.c src/uptime.c
 
 $(TARGET): $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET) $(LIBS)

@@ -21,4 +21,10 @@ void show_memory(const struct Memory *memory);
  */
 void show_swap(const struct Swap *memory);
 
+/**
+ * Function that renders uptime on the ui
+ * 
+ */
+void show_uptime(const struct Uptime *uptime);
+
 #endif

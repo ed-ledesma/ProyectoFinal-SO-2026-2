@@ -3,6 +3,7 @@
 
 #include "memory.h"
 #include "ui.h"
+#include "uptime.h"
 
 void show_memory(const struct Memory *memory) {
     mvprintw(1, 2, "Memory");
@@ -17,9 +18,15 @@ void show_swap(const struct Swap *swap) {
     mvprintw(8, 4, "Free:       %lu MB", swap->swap_free / 1024);
 }
 
+void show_uptime(const struct Uptime *uptime) {
+    mvprintw(10, 2, "Uptime");
+    mvprintw(11, 4, "%lf seconds", uptime->time);
+}
+
 void ncurses_ui(void) {
     struct Memory memory;
     struct Swap swap;
+    struct Uptime uptime;
 
     initscr();
     noecho();
@@ -28,11 +35,13 @@ void ncurses_ui(void) {
 
     while (1) {
         get_memory_info(&memory, &swap);
+        get_uptime(&uptime);
 
         clear();
 
         show_memory(&memory);
         show_swap(&swap);
+        show_uptime(&uptime);
 
         refresh();
 
