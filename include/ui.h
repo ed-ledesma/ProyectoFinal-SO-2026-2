@@ -2,6 +2,8 @@
 #define UI_H
 
 #include "memory.h"
+#include "uptime.h"
+#include "network.h"
 
 /**
  * Function that handles the ncurses ui
@@ -26,5 +28,11 @@ void show_swap(const struct Swap *memory);
  * 
  */
 void show_uptime(const struct Uptime *uptime);
+
+/**
+ * Function that renders network on the ui
+ * 
+ */
+void show_network(const struct Network *network);
 
 #endif

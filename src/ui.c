@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "ui.h"
 #include "uptime.h"
+#include "network.h"
 
 void show_memory(const struct Memory *memory) {
     mvprintw(1, 2, "Memory");
@@ -23,10 +24,20 @@ void show_uptime(const struct Uptime *uptime) {
     mvprintw(11, 4, "%lf seconds", uptime->time);
 }
 
+void show_network(const struct Network *network) {
+    mvprintw(13, 2, "Network");
+    mvprintw(14, 4, "Receiving:       %lu MB", network->rx_rate / 1048576);
+    mvprintw(15, 4, "Total Received:  %lu MB", network->rx / 1048576);
+    mvprintw(16, 4, "Sending:         %lu MB", network->tx_rate / 1048576);
+    mvprintw(17, 4, "Total Sent:      %lu MB", network->tx / 1048576);
+    
+}
+
 void ncurses_ui(void) {
-    struct Memory memory;
-    struct Swap swap;
-    struct Uptime uptime;
+    struct Memory memory = {0};
+    struct Swap swap = {0};
+    struct Uptime uptime = {0};
+    struct Network network = {0};
 
     initscr();
     noecho();
@@ -36,12 +47,14 @@ void ncurses_ui(void) {
     while (1) {
         get_memory_info(&memory, &swap);
         get_uptime(&uptime);
+        get_network_info(&network);
 
         clear();
 
         show_memory(&memory);
         show_swap(&swap);
         show_uptime(&uptime);
+        show_network(&network);
 
         refresh();
 

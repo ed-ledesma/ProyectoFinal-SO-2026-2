@@ -11,13 +11,6 @@ void get_memory_info(struct Memory *memory, struct Swap *swap) {
     unsigned long value;
     char unit[16];
 
-    // Initialize to 0
-    memory->mem_total     = 0;
-    memory->mem_free      = 0;
-    memory->mem_available = 0;
-    swap->swap_total      = 0;
-    swap->swap_free       = 0;
-
     while (fscanf(fp, "%63s %lu %15s\n", key, &value, unit) >= 2) {
         if      (strcmp(key, "MemTotal:")     == 0) memory->mem_total     = value;
         else if (strcmp(key, "MemFree:")      == 0) memory->mem_free      = value;

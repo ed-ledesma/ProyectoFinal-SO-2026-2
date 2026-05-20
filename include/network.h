@@ -9,8 +9,13 @@
 struct Network {
     unsigned long rx;
     unsigned long prev_rx;
+    unsigned long rx_rate;
+    
     unsigned long tx;
     unsigned long prev_tx;
+    unsigned long tx_rate;
+
+    int initialized;
 };
 
 /**
@@ -21,6 +26,6 @@ struct Network {
  * @return void
  * 
  */
-void get_network_info(struct Network network);
+void get_network_info(struct Network *network);
 
 #endif

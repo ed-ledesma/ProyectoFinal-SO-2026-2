@@ -9,9 +9,6 @@ void get_uptime(struct Uptime *uptime) {
 
     double value;
 
-    // Initialize to 0
-    uptime->time    = 0;
-
     fscanf(fp, "%lf", &value);
 
     uptime->time = value;
