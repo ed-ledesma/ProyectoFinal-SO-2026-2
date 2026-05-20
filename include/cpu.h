@@ -7,12 +7,15 @@
  * 
  */
 struct CPU {
-    unsigned long algo;
+    unsigned long cpu;
+    unsigned long prev_total;
+    unsigned long prev_idle;
+    double usage;
 };
 
 
 /**
- * @brief Function that reads /proc/cpuinfo
+ * @brief Function that reads /proc/stat 
  * 
  * @param cpu Struct to store CPU state
  * 

@@ -5,6 +5,7 @@
 #include "uptime.h"
 #include "network.h"
 #include "disk.h"
+#include "cpu.h"
 
 /**
  * Function that handles the ncurses ui
@@ -41,5 +42,11 @@ void show_network(const struct Network *network);
  * 
  */
 void show_disk(const struct Disk *disk);
+
+/**
+ * Function that renders cpu on the ui
+ * 
+ */
+void show_cpu(const struct CPU *cpu);
 
 #endif

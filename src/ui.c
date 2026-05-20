@@ -6,6 +6,7 @@
 #include "uptime.h"
 #include "network.h"
 #include "disk.h"
+#include "cpu.h"
 
 void show_memory(const struct Memory *memory) {
     mvprintw(1, 2, "Memory");
@@ -41,12 +42,18 @@ void show_disk(const struct Disk *disk) {
     mvprintw(23, 4, "Total Written:  %lu MB", disk->write / (1024*1024));   
 }
 
+void show_cpu(const struct CPU *cpu) {
+    mvprintw(25, 2, "CPU");
+    mvprintw(26, 4, "Usage:      %.2f%%", cpu->usage);
+}
+
 void ncurses_ui(void) {
     struct Memory memory = {0};
     struct Swap swap = {0};
     struct Uptime uptime = {0};
     struct Network network = {0};
     struct Disk disk = {0};
+    struct CPU cpu = {0};
 
     initscr();
     noecho();
@@ -58,6 +65,7 @@ void ncurses_ui(void) {
         get_uptime(&uptime);
         get_network_info(&network);
         get_disk_info(&disk);
+        get_cpu_info(&cpu);
 
         clear();
 
@@ -66,6 +74,7 @@ void ncurses_ui(void) {
         show_uptime(&uptime);
         show_network(&network);
         show_disk(&disk);
+        show_cpu(&cpu);
 
         refresh();
 
