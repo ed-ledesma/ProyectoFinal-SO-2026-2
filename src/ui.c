@@ -5,6 +5,7 @@
 #include "ui.h"
 #include "uptime.h"
 #include "network.h"
+#include "disk.h"
 
 void show_memory(const struct Memory *memory) {
     mvprintw(1, 2, "Memory");
@@ -26,11 +27,18 @@ void show_uptime(const struct Uptime *uptime) {
 
 void show_network(const struct Network *network) {
     mvprintw(13, 2, "Network");
-    mvprintw(14, 4, "Receiving:       %lu MB", network->rx_rate / 1048576);
-    mvprintw(15, 4, "Total Received:  %lu MB", network->rx / 1048576);
-    mvprintw(16, 4, "Sending:         %lu MB", network->tx_rate / 1048576);
-    mvprintw(17, 4, "Total Sent:      %lu MB", network->tx / 1048576);
-    
+    mvprintw(14, 4, "Receiving:       %lu MB", network->rx_rate / (1024*1024));
+    mvprintw(15, 4, "Total Received:  %lu MB", network->rx / (1024*1024));
+    mvprintw(16, 4, "Sending:         %lu MB", network->tx_rate / (1024*1024));
+    mvprintw(17, 4, "Total Sent:      %lu MB", network->tx / (1024*1024));   
+}
+
+void show_disk(const struct Disk *disk) {
+    mvprintw(19, 2, "Disk");
+    mvprintw(20, 4, "Reading:        %lu MB", disk->read_rate / (1024*1024));
+    mvprintw(21, 4, "Total Read:     %lu MB", disk->read / (1024*1024));
+    mvprintw(22, 4, "Writing:        %lu MB", disk->write_rate / (1024*1024));
+    mvprintw(23, 4, "Total Written:  %lu MB", disk->write / (1024*1024));   
 }
 
 void ncurses_ui(void) {
@@ -38,6 +46,7 @@ void ncurses_ui(void) {
     struct Swap swap = {0};
     struct Uptime uptime = {0};
     struct Network network = {0};
+    struct Disk disk = {0};
 
     initscr();
     noecho();
@@ -48,6 +57,7 @@ void ncurses_ui(void) {
         get_memory_info(&memory, &swap);
         get_uptime(&uptime);
         get_network_info(&network);
+        get_disk_info(&disk);
 
         clear();
 
@@ -55,6 +65,7 @@ void ncurses_ui(void) {
         show_swap(&swap);
         show_uptime(&uptime);
         show_network(&network);
+        show_disk(&disk);
 
         refresh();
 
