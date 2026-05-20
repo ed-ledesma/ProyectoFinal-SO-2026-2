@@ -17,7 +17,7 @@ void get_disk_info(struct Disk *disk) {
     unsigned long write_bytes;
 
     // Dummy for unused fields
-    unsigned long dummy[14];
+    unsigned long dummy[17];
 
     // Save previous values
     disk->prev_read = disk->read;
@@ -27,17 +27,19 @@ void get_disk_info(struct Disk *disk) {
 
         sscanf(
             line,
-            "%u %u %31s %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu",
+            "%lu %lu %31s %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu",
             &dummy[0],
             &dummy[1],
             dev,
+            &dummy[2],
+            &dummy[3],
+            &sectors_read,
             &dummy[4],
             &dummy[5],
-            &sectors_read,
             &dummy[6],
+            &sectors_written,
             &dummy[7],
             &dummy[8],
-            &sectors_written,
             &dummy[9],
             &dummy[10],
             &dummy[11],
@@ -45,17 +47,15 @@ void get_disk_info(struct Disk *disk) {
             &dummy[13],
             &dummy[14],
             &dummy[15],
-            &dummy[16],
-            &dummy[17],
-            &dummy[18]
+            &dummy[16]
         );
 
         read_bytes = sectors_read * 512;
         write_bytes = sectors_written * 512;
         
         if (!disk->initialized) {
-            disk->prev_read = write_bytes;
-            disk->prev_write = read_bytes;
+            disk->prev_read = read_bytes;
+            disk->prev_write = write_bytes;
 
             disk->read_rate = 0;
             disk->write_rate = 0;
