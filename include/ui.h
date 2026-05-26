@@ -6,6 +6,7 @@
 #include "network.h"
 #include "disk.h"
 #include "cpu.h"
+#include "process.h"
 
 /**
  * Function that handles the ncurses ui
@@ -48,5 +49,11 @@ void show_disk(const struct Disk *disk);
  * 
  */
 void show_cpu(const struct CPU *cpu);
+
+/**
+ * Function that renders process on the  ui
+ * 
+ */
+void show_processes(const struct ProcessList *plist);
 
 #endif
