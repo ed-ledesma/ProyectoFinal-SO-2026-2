@@ -107,10 +107,10 @@ void show_cpu(const struct CPU *cpu) {
 void show_network(const struct Network *network) {
     int col = getmaxx(stdscr) / 3 * 0;
     mvprintw(4, col + 2, "Network");
-    mvprintw(5, col + 4, "RX: %lu MB/s  TX: %lu MB/s",
+    mvprintw(5, col + 4, "RX: %lu MB/s   TX: %lu MB/s",
         network->rx_rate / (1024*1024),
         network->tx_rate / (1024*1024));
-    mvprintw(6, col + 4, "TRX: %lu MB    TTX: %lu MB",
+    mvprintw(6, col + 4, "TRX: %lu MB TTX: %lu MB",
         network->rx / (1024*1024),
         network->tx / (1024*1024));
 }
@@ -118,10 +118,10 @@ void show_network(const struct Network *network) {
 void show_disk(const struct Disk *disk) {
     int col = getmaxx(stdscr) / 3 * 1;
     mvprintw(4, col + 2, "Disk");
-    mvprintw(5, col + 4, "RX: %lu MB/s  WX: %lu MB/s",
+    mvprintw(5, col + 4, "RX: %lu MB/s     WX: %lu MB/s",
         disk->read_rate  / (1024*1024),
         disk->write_rate / (1024*1024));
-    mvprintw(6, col + 4, "TRX: %lu MB    TWX: %lu MB",
+    mvprintw(6, col + 4, "TRX: %lu MB  TWX: %lu MB",
         disk->read  / (1024*1024),
         disk->write / (1024*1024));
 }
